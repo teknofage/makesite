@@ -3,7 +3,19 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
+	"text/template"
 )
+type entry struct {
+	Name string
+	Done bool
+}
+
+type ToDo struct {
+	User string
+	List []entry
+}
+
 
 func main() {
 	fileContents, err := ioutil.ReadFile("first-post.txt")
@@ -13,5 +25,10 @@ func main() {
         // panics if we get an unexpected error when creating a new file.
         panic(err)
 	}
+	t := template.Must(template.New("template.tmpl").ParseFiles("template.tmpl"))
+        err = t.Execute(os.Stdout, string(fileContents))
+        if err != nil {
+          panic(err)
+        }
 	fmt.Println("Hello, world!")
 }
