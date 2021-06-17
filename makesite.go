@@ -8,14 +8,10 @@ import (
 	"flag"
 	"strings"
 )
-type entry struct {
-	Name string
-	Done bool
-}
-
-type ToDo struct {
-	User string
-	List []entry
+// Holds the title and body from the text file: update for stretch challenge
+type Blog struct {
+	Title string
+	Body string
 }
 
 
