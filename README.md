@@ -71,9 +71,9 @@ If you get stuck on any step, be sure to print the output to `stdout`!
 - [x] Create 3 new `.txt` files for testing in the same directory as your project.
 - [x] Add a new flag to the `makesite` command named `dir`.
 - [x] Use the flag to find all `.txt` files in the given directory. Print them to `stdout`.
-- [ ] With the list of `.txt` files you found, generate an HTML page for each.
-- [ ] Run `./makesite --dir=.` to test in your local directory.
-- [ ] **Add, commit, and push to GitHub**.
+- [x] With the list of `.txt` files you found, generate an HTML page for each.
+- [x] Run `./makesite --dir=.` to test in your local directory.
+- [x] **Add, commit, and push to GitHub**.
 
 #### v1.1 Stretch Challenges
 
@@ -88,10 +88,10 @@ If you get stuck on any step, be sure to print the output to `stdout`!
 #### v1.2 Requirements
 
 - [x] Initialize Go modules in your project.
-- [ ] Add any third party library to your project to enhance it's functionality. Some ideas you might consider include **_(CHOOSE ONLY ONE)_**:
-    - [ ] Translating page content using Google Translate.
+- [ ] Add any third party library to your project to enhance its functionality. Some ideas you might consider include **_(CHOOSE ONLY ONE)_**:
+    - [x] Translating page content using Google Translate.
     - [ ] Parse Markdown (`.md`) files and transform them into HTML. `#` through `######` should translate to `<h1>` through `<h6>` elements.
-    - [ ] **_FILL IN THE BLANK_**: `I will use the __________________________________ library. The documentation is located at __________________________________. My goal is to use it to __________________________________.`
+    - [ ] **_FILL IN THE BLANK_**: `I will use the Google Translate library. The documentation is located at https://cloud.google.com/translate/docs/reference/libraries/v3/go. My goal is to use it to increase accessibility for non-English speaking users and ESL users.`
 - [ ] **Add, commit, and push to GitHub**.
 
 ## Resources

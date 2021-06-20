@@ -8,6 +8,11 @@ import (
 	"text/template"
 	"flag"
 	"strings"
+	"context"
+
+	translate "cloud.google.com/go/translate/apiv3"
+	translatepb "google.golang.org/genproto/googleapis/cloud/translate/v3"
+
 )
 // Holds the title and body from the text file: update for stretch challenge
 type Blog struct {
@@ -68,4 +73,39 @@ func directoryManipulation(directory string) {
 			fileManipulation(file.Name())
 		}
 	}
+}
+
+// translateText translates input text and returns translated text.
+func translateText(text string) error {
+	projectID := "the-ridge-317404"
+	sourceLang := "en-US"
+	targetLang := "fr"
+	// text := "Text you wish to translate"
+
+	ctx := context.Background()
+	client, err := translate.NewTranslationClient(ctx)
+	if err != nil {
+			return fmt.Errorf("NewTranslationClient: %v", err)
+	}
+	defer client.Close()
+
+	req := &translatepb.TranslateTextRequest{
+			Parent:             fmt.Sprintf("projects/%s/locations/global", projectID),
+			SourceLanguageCode: sourceLang,
+			TargetLanguageCode: targetLang,
+			MimeType:           "text/plain", // Mime types: "text/plain", "text/html"
+			Contents:           []string{text},
+	}
+
+	resp, err := client.TranslateText(ctx, req)
+	if err != nil {
+			return fmt.Errorf("TranslateText: %v", err)
+	}
+
+	// Display the translation for each input text provided
+	for _, translation := range resp.GetTranslations() {
+			fmt.Fprintf(w, "Translated text: %v\n", translation.GetTranslatedText())
+	}
+
+	return nil
 }
