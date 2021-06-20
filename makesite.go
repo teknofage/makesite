@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	// "fmt"
 	"io/ioutil"
 	"os"
 	"log"
@@ -65,7 +65,7 @@ func directoryManipulation(directory string) {
 
 	for _, file := range files {
 		if file.Name()[len(file.Name())-3:] == "txt" {
-			fmt.Println(file.Name())
+			fileManipulation(file.Name())
 		}
 	}
 }
