@@ -88,11 +88,11 @@ If you get stuck on any step, be sure to print the output to `stdout`!
 #### v1.2 Requirements
 
 - [x] Initialize Go modules in your project.
-- [ ] Add any third party library to your project to enhance its functionality. Some ideas you might consider include **_(CHOOSE ONLY ONE)_**:
-    - [x] Translating page content using Google Translate.
+- [x] Add any third party library to your project to enhance its functionality. Some ideas you might consider include **_(CHOOSE ONLY ONE)_**:
+    - [ ] Translating page content using Google Translate.
     - [ ] Parse Markdown (`.md`) files and transform them into HTML. `#` through `######` should translate to `<h1>` through `<h6>` elements.
-    - [ ] **_FILL IN THE BLANK_**: `I will use the Google Translate library. The documentation is located at https://cloud.google.com/translate/docs/reference/libraries/v3/go. My goal is to use it to increase accessibility for non-English speaking users and ESL users.`
-- [ ] **Add, commit, and push to GitHub**.
+    - [x] **_FILL IN THE BLANK_**: `I will use the minimp3 library. The documentation is located at https://github.com/tosone/minimp3. My goal is to use it to play mp3 files at when the file is run.`
+- [x] **Add, commit, and push to GitHub**.
 
 ## Resources
 

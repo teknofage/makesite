@@ -5,6 +5,8 @@ go 1.16 //version of go used
 require (
 	cloud.google.com/go v0.84.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
+	github.com/hajimehoshi/oto v0.7.1 // indirect
+	github.com/tosone/minimp3 v1.0.1 // indirect
 	golang.org/x/net v0.0.0-20210614182718-04defd469f4e // indirect
 	golang.org/x/oauth2 v0.0.0-20210615190721-d04028783cf1 // indirect
 	golang.org/x/sys v0.0.0-20210616094352-59db8d763f22 // indirect

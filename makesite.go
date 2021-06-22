@@ -8,11 +8,10 @@ import (
 	"text/template"
 	"flag"
 	"strings"
-	"context"
+	"time"
 
-	translate "cloud.google.com/go/translate/apiv3"
-	translatepb "google.golang.org/genproto/googleapis/cloud/translate/v3"
-
+	"github.com/hajimehoshi/oto"
+	"github.com/tosone/minimp3"
 )
 // Holds the title and body from the text file: update for stretch challenge
 type Blog struct {
@@ -69,43 +68,41 @@ func directoryManipulation(directory string) {
 	}
 
 	for _, file := range files {
+		
 		if file.Name()[len(file.Name())-3:] == "txt" {
 			fileManipulation(file.Name())
+		} else if file.Name()[len(file.Name())-3:] == "mp3"{
+			decodeMp3(file.Name())
 		}
-	}
+	} 
 }
 
-// translateText translates input text and returns translated text.
-func translateText(text string) error {
-	projectID := "the-ridge-317404"
-	sourceLang := "en-US"
-	targetLang := "fr"
-	// text := "Text you wish to translate"
+func decodeMp3(mp3name string) {
+	var err error
 
-	ctx := context.Background()
-	client, err := translate.NewTranslationClient(ctx)
-	if err != nil {
-			return fmt.Errorf("NewTranslationClient: %v", err)
-	}
-	defer client.Close()
-
-	req := &translatepb.TranslateTextRequest{
-			Parent:             fmt.Sprintf("projects/%s/locations/global", projectID),
-			SourceLanguageCode: sourceLang,
-			TargetLanguageCode: targetLang,
-			MimeType:           "text/plain", // Mime types: "text/plain", "text/html"
-			Contents:           []string{text},
+	var file []byte
+	if file, err = ioutil.ReadFile(mp3name); err != nil {
+		log.Fatal(err)
 	}
 
-	resp, err := client.TranslateText(ctx, req)
-	if err != nil {
-			return fmt.Errorf("TranslateText: %v", err)
+	var dec *minimp3.Decoder
+	var data []byte
+	if dec, data, err = minimp3.DecodeFull(file); err != nil {
+		log.Fatal(err)
 	}
 
-	// Display the translation for each input text provided
-	for _, translation := range resp.GetTranslations() {
-			fmt.Fprintf(w, "Translated text: %v\n", translation.GetTranslatedText())
+	var context *oto.Context
+	if context, err = oto.NewContext(dec.SampleRate, dec.Channels, 2, 1024); err != nil {
+		log.Fatal(err)
 	}
 
-	return nil
+	var player = context.NewPlayer()
+	player.Write(data)
+
+	<-time.After(time.Second)
+
+	dec.Close()
+	if err = player.Close(); err != nil {
+		log.Fatal(err)
+	}
 }
